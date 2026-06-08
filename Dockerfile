@@ -5,8 +5,11 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Встановлюємо необхідні бібліотеки безпосередньо через pip
-RUN pip install --no-cache-dir numpy scipy matplotlib
+# Копіюємо файл залежностей
+COPY requirements.txt .
+
+# Встановлюємо залежності
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Копіюємо файл зі скриптом
 COPY main.py .
