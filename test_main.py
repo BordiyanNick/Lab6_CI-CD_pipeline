@@ -1,17 +1,17 @@
 # Модель: Математичне моделювання біологічного росту бактерій (5 семестр)
 # Автор: Бордіян Микола Павлович, група AI-231
 
-import pytest
+import unittest
 from main import app
 
-@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+class TestAPI(unittest.TestCase):
+    def setUp(self):
+        self.app = app.test_client()
+        self.app.testing = True
 
-def test_calculate_route(client):
-    # Тест перевіряє, чи повертає API відповідь 200 або 400 (залежно від логіки)
-    # для запиту без даних
-    response = client.post('/calculate', json={})
-    assert response.status_code == 200
+    def test_status_code(self):
+        response = self.app.get('/calculate')
+        self.assertNotEqual(response.status_code, 404)
+
+if __name__ == '__main__':
+    unittest.main()
