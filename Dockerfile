@@ -12,7 +12,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копіюємо файл зі скриптом
-COPY main.py .
+COPY . .
+EXPOSE 5000
 
 # Команда для запуску скрипта
 CMD ["python", "main.py"]
