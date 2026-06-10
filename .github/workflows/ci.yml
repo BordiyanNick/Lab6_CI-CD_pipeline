@@ -20,10 +20,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install pytest  # Додаємо pytest
 
-    - name: Run syntax check
+    - name: Run tests
       run: |
-        python -m py_compile main.py
+        pytest test_main.py  # Етап тестування для непарного варіанту
 
     - name: Build Docker image
       run: |
